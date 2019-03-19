@@ -1,0 +1,38 @@
+<div class="jumbotron">
+  <h1>Olá, {{vm.name}}</h1>
+  
+  
+  
+    <div class="row">
+      
+        <div class="input-group flex-nowrap">
+            <input type="text" class="form-control" ng-model="name" placeholder=" Digite um nome"  aria-describedby="addon-wrapping">
+            <a href="#!/cadastrar"> <button type="button" class="btn btn-warning " >Cadastrar</button></a>
+            <a href="#!/home"> <button type="button" class="btn btn-outline-secondary" >Retornar</button></a>
+          </div>
+  
+    <table class="table table-hover table-dark" class="col-4"> 
+      <thead>
+        <tr>
+          
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Qts de Sapatos</th>
+          <th scope="col">Opções</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat='mulher in vm.mulheres |filter:name'>
+          <tr ng-repeat='sapato in mulher.sapatos'></tr>
+            <td>{{mulher.id}}</td>
+            <td><b>{{mulher.nome}}</b></td>
+            <td>{{mulher.sapatos.length }}</td>
+            <td> <button type="button" class="btn btn-secondary" ng-click="editar(vm.mulher.id)">Editar</button>
+            <button type="button" class="btn btn-danger" ng-click="vm.excluir(vm.mulher.id)">Excluir</button></td>
+      
+        </tr>
+      </tbody>
+    </table>
+    
+ 
+
+</div>

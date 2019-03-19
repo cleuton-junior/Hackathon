@@ -1,0 +1,46 @@
+<div class="jumbotron">
+  <form name="cadastroForm" ng-submit="vm.salvar(vm.mulher)" >
+  <div class="form-group">
+      <h1>Cadastrar Mulher</h1>
+    </div>
+    <div class="col-sm-7 ">
+      <label >Nome</label>
+      <input type="text"  class= "form-control"  ng-model="vm.mulher.nome" required="true" maxlength="20">
+      <div ng-show="vm.mulher.nome" >
+          <div class="col-sm-7">
+           <br/>
+           <label>Modelo Sapato</label>
+           <input type="text"  class= "form-control"  ng-model="vm.sapato.modelo">
+           
+          </div>
+          
+        </div>
+      <button type="submit" class="btn btn-primary"  ng-click="vm.salvar(vm.mulher)" >Salvar</button>
+      <a href="#!/mulher"> <button type="text" class="btn btn-outline-secondary">Voltar</button></a>
+    </div>
+  
+  <table class="table table-hover table-dark" class="col-4"> 
+    <thead>
+      <tr>
+        
+        <th scope="col">#</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Qtd de Sapatos</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat='sapato in sapatos'></tr>
+          <td>{{sapato.id}}</td>
+          <td><b>{{sapato.modelo}}</b></td>
+          <td>{{sapato.modelo.length }}</td>
+      </tr>
+    </tbody>
+  </table>   
+      
+         
+        
+</div>
+</form>
+
+ 
