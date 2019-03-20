@@ -37,7 +37,7 @@ export default class MulherController {
       },
       
       function(err){
-        alert("Nome já existe");
+        alert("Esse nome já está cadastrado");
         init();
       }
         
