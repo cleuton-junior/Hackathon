@@ -1,13 +1,13 @@
 package com.stefanini.projeto.service;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,8 +43,8 @@ public class MulherService {
 		}
 	}
 	
-	public void remover( Long id) throws TreinaException {
-		repository.deleteById(id);
+	public void remover(Mulher mulher) {
+		repository.delete(mulher);
 	}
 	public Mulher atualizar(@PathVariable Long id,@Valid @RequestBody Mulher mulher){
 		Mulher mulherSalva = repository.findById(id).orElse(null);
@@ -53,12 +53,8 @@ public class MulherService {
 		
 	}
 
-	public ResponseEntity<Optional<Mulher>> buscarCodigo(@PathVariable Long id) {
-		Optional<Mulher> mulherSalva = repository.findById(id);
-		if (mulherSalva != null)
-			return ResponseEntity.ok(mulherSalva);
-		else
-			return ResponseEntity.notFound().build();
+	public Mulher buscarCodigo(Long id) throws IOException{
+		return repository.findById(id).get();
 		
 	}
 	

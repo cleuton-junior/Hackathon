@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+
 
 @Entity
 public class Sapato implements Serializable{
@@ -18,8 +18,8 @@ public class Sapato implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "SQ_SA_NU", sequenceName = "SQ_SA_NU", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_SA_NU")
+
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "SA_NU")
 	private Long id;
 

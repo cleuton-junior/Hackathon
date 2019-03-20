@@ -1,24 +1,23 @@
 <div class="jumbotron">
-  <form name="cadastroForm" ng-submit="vm.salvar(vm.mulher)" >
+  <form name="cadastroForm" >
   <div class="form-group">
-      <h1>Cadastrar Mulher</h1>
+      <h1>Cadastrar Sapato</h1>
     </div>
-    <div class="col-sm-7 ">
-      <label >Nome</label>
-      <input type="text"  class= "form-control"  ng-model="vm.mulher.nome" required="true" maxlength="20">
-      <div ng-show="vm.mulher.nome" >
-          <div class="col-sm-7">
-           <br/>
-           <label>Modelo Sapato</label>
-           <input type="text"  class= "form-control"  ng-model="vm.sapato.modelo">
-           
-          </div>
-          
-        </div>
-      <button type="submit" class="btn btn-primary"  ng-click="vm.salvar(vm.mulher)" >Salvar</button>
-      <a href="#!/mulher"> <button type="text" class="btn btn-outline-secondary">Voltar</button></a>
+    <div class="row">
+      <div class="col-md-6">
+      <label >Modelo</label>
+      <input type="text"  class= "form-control"  ng-model="vm.sapato.modelo" maxlength="20">
     </div>
-  
+    </div>
+    <div class="row ">
+    <div class="col-md-6">
+      <label >Nome da Proprietaria</label>
+      <input type="text"  class= "form-control"  ng-model="vm.sapato.mulher" maxlength="20">
+      <div ng-if = "vm.mulher.sapatos.length < 5 == false">
+      <button type="submit" class="btn btn-primary" ng-click="vm.salvarSapato(vm.sapato)" >Salvar</button>
+    </div>
+    </div>
+  </div> 
   <table class="table table-hover table-dark" class="col-4"> 
     <thead>
       <tr>
@@ -26,21 +25,30 @@
         <th scope="col">#</th>
         <th scope="col">Modelo</th>
         <th scope="col">Qtd de Sapatos</th>
+        <th scope="col">Mulher</th>
        
       </tr>
     </thead>
-    <tbody>
-        <tr ng-repeat='sapato in sapatos'></tr>
+    <tbody ng-repeat='sapato in vm.sapatos'>
+        <tr ng-repeat='mulher in sapato.mulheres'></tr>
           <td>{{sapato.id}}</td>
           <td><b>{{sapato.modelo}}</b></td>
-          <td>{{sapato.modelo.length }}</td>
+          <td>{{mulher.sapatos.length}}</td>
+          <td>{{sapato.mulheres.nome }}</td>
+          <td><button class="btn btn-danger btn-sm" ng-click="vm.excluirSapato(sapato.id)" >Excluir</button>
       </tr>
     </tbody>
-  </table>   
-      
-         
-        
-</div>
+  </table>        
+  <div ng-if = "vm.mulher.sapatos.length < 5">
+      <button class="btn btn-primary btn-sm" >Adcionar Sapato</button>
+    </div>
+  </div>
+      <div class="modal-footer">
+      <a href="#!/mulher"> <button type="text" class="btn btn-outline-secondary">Voltar</button></a>
+      </div>
+      </div>
+    </div>           
+  </div>
 </form>
 
  

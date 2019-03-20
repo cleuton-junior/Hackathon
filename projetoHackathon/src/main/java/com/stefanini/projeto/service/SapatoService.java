@@ -1,5 +1,7 @@
 package com.stefanini.projeto.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,10 @@ public class SapatoService {
 	
 	@Autowired
 	private SapatoRepository repository;
+	
+	public List<Sapato> todosSapatos() throws TreinaException {
+		return (List<Sapato>) repository.findAll();
+	}
 	
 	public Sapato salvarSapato(Sapato sapato) {
 		return repository.save(sapato);

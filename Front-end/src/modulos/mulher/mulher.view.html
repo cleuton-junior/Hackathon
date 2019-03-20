@@ -1,20 +1,16 @@
 <div class="jumbotron">
   <h1>Olá, {{vm.name}}</h1>
-  
-  
-  
     <div class="row">
       
         <div class="input-group flex-nowrap">
             <input type="text" class="form-control" ng-model="name" placeholder=" Digite um nome"  aria-describedby="addon-wrapping">
-            <a href="#!/cadastrar"> <button type="button" class="btn btn-warning " >Cadastrar</button></a>
+            <button type="button" data-toggle="modal" data-target="#exampleModal2" id="salvando" class="btn btn-warning " >Cadastrar</button>
             <a href="#!/home"> <button type="button" class="btn btn-outline-secondary" >Retornar</button></a>
           </div>
   
     <table class="table table-hover table-dark" class="col-4"> 
       <thead>
         <tr>
-          
           <th scope="col">#</th>
           <th scope="col">Nome</th>
           <th scope="col">Qts de Sapatos</th>
@@ -26,13 +22,68 @@
             <td>{{mulher.id}}</td>
             <td><b>{{mulher.nome}}</b></td>
             <td>{{mulher.sapatos.length }}</td>
-            <td> <button type="button" class="btn btn-secondary" ng-click="editar(vm.mulher.id)">Editar</button>
-            <button type="button" class="btn btn-danger" ng-click="vm.excluir(vm.mulher.id)">Excluir</button></td>
-      
-        </tr>
+            <td> <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" id="editando"ng-click="vm.editar(mulher.id)">Editar</button>
+            <button type="button" class="btn btn-danger" ng-click="vm.excluir(mulher.id)">Excluir</button></td>
+  
+<!-- Modal Alterar Mulher -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="editando" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editando">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <form name="cadastroForm" >
+          <div class="form-group">
+              <h1>Atualizar Mulher</h1>
+            </div>
+            <div class="col-sm-7 ">
+              <label >Nome</label>
+              <input type="text"  class= "form-control"  ng-model="vm.mulher.nome" maxlength="20">           
+            </div>
+        </form> 
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary"  ng-click="vm.salvar(vm.mulher.nome)" >Salvar</button>
+          <a href="#!/mulher"><button type="text" data-dismiss="modal" >Voltar</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Cadastrar Mulher -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="salvando" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="salvando">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">  
+          <form name="cadastroForm" >
+            <div class="form-group">
+                <h1>Cadastrar Mulher</h1>
+              </div>
+              <div class="col-sm-7 ">
+                <label >Nome</label>
+                <input type="text"  class= "form-control"  ng-model="vm.mulher.nome" maxlength="20">
+              </div>
+          </form>   
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary"  ng-click="vm.salvar(vm.mulher.nome)" >Salvar</button>
+            <a href="#!/mulher"> <button type="text" class="btn btn-outline-secondary">Voltar</button></a>        
+        </div>
+      </div>
+    </div>
+  </div>
+           </tr>
       </tbody>
     </table>
-    
- 
-
 </div>

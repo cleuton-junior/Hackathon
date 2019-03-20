@@ -1,8 +1,9 @@
 package com.stefanini.projeto.controller;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.validation.Valid;
 
@@ -11,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,11 +42,12 @@ public class MulherController {
 		return service.findAll();
 	}
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	@DeleteMapping("/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void remover(@PathVariable Long id) throws TreinaException {
-		service.remover(id);
+	public @ResponseBody ResponseEntity<Void> remover(@PathVariable("id") String id)
+			throws IOException, TreinaException {
+		Mulher mulher = service.buscarCodigo(Long.parseLong(id));
+		service.remover(mulher);
+		return new ResponseEntity<>(HttpStatus.OK);
 
 	}
 
@@ -66,8 +67,9 @@ public class MulherController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Mulher>> buscarPeloCodigo(@PathVariable Long id) {
-		return service.buscarCodigo(id);
+	public @ResponseBody Mulher buscarPeloCodigo(@PathVariable("id") String id)
+			throws NumberFormatException, IOException {
+		return service.buscarCodigo(Long.parseLong(id));
 	}
 
 	@PutMapping("/{id}")
@@ -76,8 +78,5 @@ public class MulherController {
 		return ResponseEntity.ok(mulherSalva);
 	}
 
-	public void letraMaiscula(Mulher mulher) {
-		mulher.getNome().substring(0, 1).toUpperCase().concat(mulher.toString());
-
-	}
 }
+

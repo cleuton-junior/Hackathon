@@ -15,30 +15,62 @@ export default class MulherController {
     
     this.sapato={};
     this.mulher={};
+    this.sapatos=[];
 
     init();
+    sapat();
     
     function init(){
       mulherService.getDonos().then(function abc(resp) {
         vm.mulheres = resp.data; 
       });  
     }
+    function  sapat(){
+      mulherService.getSapatos().then(function sap(resp) {
+        vm.sapatos = resp.data; 
+      });
+    }
     this.salvar = function(){
       mulherService.salvar(vm.mulher).then(function save(resp){
         vm.mulher = resp.data;
-      });
+        init();
+      },
+      
+      function(err){
+        alert("Nome já existe");
+        init();
+      }
+        
+      );
     }
-    this.excluir = function(){
-      mulherService.remover(vm.mulher).then(function exc(resq){
-          vm.mulher = resq.data;
+    this.excluir = function(id){
+      mulherService.remover(id).then(function exc(resq){
+        init();
         })
       }
     this.editar = function(obj){
-        alert(obj.id)
-        $state.go('cadastrar',{obj: obj})
-        console.log("Enviou" + vm.mulher.nome);
+     
+      mulherService.editar(obj).then(function edi(resq){
         
+            vm.mulher = resq.data;
+            vm.mulheres=[];
+            vm.sapatos={};
+                
+             init();
+      })
+                      
               }
+      this.salvarSapato = function(){
+        mulherService.salvarSapato(vm.sapato).then(function save(resp){
+        vm.sapato= resp.data;
+          sapat();
+        });
+      }
+      this.excluirSapato = function(id){
+        mulherService.removerSapato(id).then(function exc(resq){
+          sapat();
+          })
+        }
     }
     }
 

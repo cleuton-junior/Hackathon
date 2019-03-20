@@ -1,5 +1,7 @@
 package com.stefanini.projeto.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +26,11 @@ public class SapatoController {
 
 	@Autowired
 	private SapatoService service;
+	
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<Sapato> findAll() throws TreinaException  {
+		return service.todosSapatos();
+	}
 	
 	
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
